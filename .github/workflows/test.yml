@@ -1,0 +1,13 @@
+name: Test
+on:
+  pull_request:                        # プルリクエストが作成されたら起動
+    paths: ['go/**/*.go']              # ただしGoファイルに変更があった場合のみ
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4      # ステップ1: コードをチェックアウト
+      - uses: actions/setup-go@v5      # ステップ2: Go環境をセットアップ
+        with:
+          go-version: '1.22'
+      - run: go test go/excellent/*.go # ステップ3: テストを実行
